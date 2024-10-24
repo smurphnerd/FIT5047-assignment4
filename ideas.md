@@ -22,3 +22,9 @@
 - Malicious use of AI
 - Deep fakes
 - Algorithmic fairness
+
+## Implementation
+
+### Challenges
+
+Getting the superimposed structure (triangle)
