@@ -3,19 +3,19 @@
 
 What is this paper about?
 
-The \textit{Toy Models of Superposition} paper \cite{elhage2022toy} published in 2022 by researchers from Anthropic and Harvard University, investigates "superposition," a phenomenon where neural networks represent more features than they have available dimensions.
+The \textit{Toy Models of Superposition} paper \cite{elhage2022toy} published in 2022 by researchers from Anthropic and Harvard University, investigates "superposition", a phenomenon where neural networks represent more features than they have available dimensions.
 They define a \textit{feature} as an interpretable property of the input that neurons respond to.
-The paper focuses on how neural networks handle this limitation through the use of polysemantic neurons, which represent multiple features at once.
+The paper focuses on how neural networks overcome their limited dimensions through the use of polysemantic neurons, which represent multiple features at once.
 
-The authors use a toy model to demonstrate superposition by projecting five features onto only two dimensions, then attempting to recover the original features.
-One key finding is that the sparsity of a feature—how rarely it occurs—determines whether it is represented in superposition. For instance, when features are not sparse, only the two most important ones are represented in dedicated orthogonal dimensions.
+The authors use a toy model to demonstrate superposition by training it to project five features onto only two dimensions, then attempting to recover the original features.
+One key finding is that the sparsity of a feature—how rarely it occurs—is a primary factor in determining whether it is represented in superposition. For instance, when features are not sparse, only the two most important ones are represented in dedicated orthogonal dimensions.
 However, as sparsity increases, the model begins to encode all five features in superposition, arranging them geometrically in a pentagon-like structure within the two-dimensional space.
-This results in interference between the features.
+This results in interference between the features, where one's presence also activates other unrelated neurons.
 
-The middle sections of the paper provide a mathematical explanation for why superposition occurs and delve into the specifics of the toy model's design.
-The paper concludes by discussing how "solving superposition" could lead to more interpretable and safer AI models
+The middle sections of the paper provide a mathematical explanation for why superposition occurs, whilst also exploring the specific "phases" of superposition that can occur under different conditions. 
+The paper concludes by discussing how "solving superposition" could lead to more interpretable and safer AI models.
 They suggest that a key step in achieving this would be the ability to identify and enumerate all features in a model—what they refer to as the fundamental units of a neural network.
-With such an understanding, one could potentially have a universal quantifier over these features, enabling confidence that models would avoid harmful behaviors like deception or manipulation.
+With such an understanding, one could potentially produce a universal quantifier over these features, which could be used to fully explain model behaviour and thus enabling confidence that models would not simply avoid, but perhaps be entirely incapable of unethical behaviours like deception.
 The authors propose that this might be achieved either by designing models that avoid superposition entirely or by finding an overcomplete basis that disentangles the superimposed features, motivating future research directions.
 
 %-------------------------------------------------------------------------
@@ -35,11 +35,11 @@ With over 200 citations in just 2 years, this paper has fueled a lot of modern d
 \subsection{Relevance in the Deep Learning Era}
 
 In the current deep learning era, where advancements in model capabilities are positively correlated with model complexity, continuing to iterate this way only creates bigger, and bigger black boxes.
-The insights of superposition this paper brings suggests an alternate direction that would allow us to better understand these black boxes by "solving superposition".
+The insights this paper presents regarding the superposition phenomenon suggests alternate directions that would allow us to better understand these black boxes by "solving superposition".
 
-Additionally, this paper shows the importance of model architecture and the tradeoff between model size, and the interference caused by superposition.
-As out understanding of model features matures, there is potential for model architecture hyperparams to be more analytically selected given feature sparsity.
-If we are able to obtain universal quantifiers over features as the paper suggests, we may even see a shift in the deep learning era where engineers can build these networks by hand, defining which features to include and omit, and which neurons to make polysemantic and which to dedicate their own feature (monosemantic).
+Additionally, this paper shows the importance of model architecture, illuminating the tradeoff between efficiency brought about by smaller model sizes, and the interference caused by the superpositional feature representations that it necessitates.
+As our understanding of model features matures, there is potential for model architecture hyperparams to be more analytically selected given information about the data, such as feature sparsity.
+If we are able to obtain universal quantifiers over features as the paper suggests, we may even see a shift in the deep learning era where engineers can build or modify parts of these networks manually, where we have the ability to dictate the inclusion of specific features, and change the semanticity of neurons at will.
 
 % Is it still meaning in the deep learning era?
 % Superposition remains highly relevant in the deep learning era as models continue to grow in size and complexity. While deep learning has enabled unprecedented performance in various domains—ranging from image recognition to language understanding—these gains have often come at the expense of model transparency and interpretability.
