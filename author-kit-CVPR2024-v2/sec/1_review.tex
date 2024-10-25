@@ -1,8 +1,6 @@
 \section{Review}
 \label{sec:review}
 
-What is this paper about?
-
 The \textit{Toy Models of Superposition} paper \cite{elhage2022toy} published in 2022 by researchers from Anthropic and Harvard University, investigates "superposition", a phenomenon where neural networks represent more features than they have available dimensions.
 They define a \textit{feature} as an interpretable property of the input that neurons respond to.
 The paper focuses on how neural networks overcome their limited dimensions through the use of polysemantic neurons, which represent multiple features at once.
@@ -12,46 +10,28 @@ One key finding is that the sparsity of a feature—how rarely it occurs—is a 
 However, as sparsity increases, the model begins to encode all five features in superposition, arranging them geometrically in a pentagon-like structure within the two-dimensional space.
 This results in interference between the features, where one's presence also activates other unrelated neurons.
 
-The middle sections of the paper provide a mathematical explanation for why superposition occurs, whilst also exploring the specific "phases" of superposition that can occur under different conditions. 
+The middle sections of the paper provide a mathematical explanation for why superposition occurs, whilst also exploring the specific "phases" of superposition that can occur under different conditions.
 The paper concludes by discussing how "solving superposition" could lead to more interpretable and safer AI models.
 They suggest that a key step in achieving this would be the ability to identify and enumerate all features in a model—what they refer to as the fundamental units of a neural network.
-With such an understanding, one could potentially produce a universal quantifier over these features, which could be used to fully explain model behaviour and thus enabling confidence that models would not simply avoid, but perhaps be entirely incapable of unethical behaviours like deception.
+With such an understanding, one could potentially produce a universal quantifier over these features, which could be used to fully explain model behaviour and thus enable confidence that models would not simply avoid, but perhaps be entirely incapable of unethical behaviours like deception.
 The authors propose that this might be achieved either by designing models that avoid superposition entirely or by finding an overcomplete basis that disentangles the superimposed features, motivating future research directions.
 
 %-------------------------------------------------------------------------
 
 \subsection{Significance}
 
-Why is it significant?
 The concept of superposition, as explored in this paper, holds significant implications for both our theoretical understanding of neural networks and practical advancements in mechanistic interpretability and AI safety.
 It provides an entirely new perspective on the fundamental units of neural networks by showing how polysemantic neurons can be broken down into multiple features.
 With over 200 citations in just 2 years, this paper has fueled a lot of modern day mechanistic interpretability research.
 
-%
-%
-% AI Safety: As models are deployed in critical systems, ensuring that they behave safely and predictably becomes paramount. Superposition complicates efforts to understand the internal workings of a model, potentially leading to unexpected or harmful behaviors. Solving superposition, as outlined in the paper, could lead to safer models by making the features they learn more transparent and interpretable.
-% In essence, superposition touches on fundamental issues in machine learning, ranging from the efficiency of feature representation to the interpretability of neural networks, making it a key area of research for both theoretical and practical reasons.
-
 \subsection{Relevance in the Deep Learning Era}
 
 In the current deep learning era, where advancements in model capabilities are positively correlated with model complexity, continuing to iterate this way only creates bigger, and bigger black boxes.
-The insights this paper presents regarding the superposition phenomenon suggests alternate directions that would allow us to better understand these black boxes by "solving superposition".
+The insights this paper presents regarding the superposition phenomenon suggest alternate directions that would allow us to better understand these black boxes by "solving superposition".
 
 Additionally, this paper shows the importance of model architecture, illuminating the tradeoff between efficiency brought about by smaller model sizes, and the interference caused by the superpositional feature representations that it necessitates.
 As our understanding of model features matures, there is potential for model architecture hyperparams to be more analytically selected given information about the data, such as feature sparsity.
-If we are able to obtain universal quantifiers over features as the paper suggests, we may even see a shift in the deep learning era where engineers can build or modify parts of these networks manually, where we have the ability to dictate the inclusion of specific features, and change the semanticity of neurons at will.
-
-% Is it still meaning in the deep learning era?
-% Superposition remains highly relevant in the deep learning era as models continue to grow in size and complexity. While deep learning has enabled unprecedented performance in various domains—ranging from image recognition to language understanding—these gains have often come at the expense of model transparency and interpretability.
-% Neural networks, particularly large-scale ones, often function as black boxes, making it difficult to understand how they process and store information.
-% The phenomenon of superposition directly contributes to this opacity.
-%
-% Key reasons for its continued relevance include:
-%
-% Scaling: As deep learning models scale up in size, the need to represent a vast number of features in a finite number of dimensions becomes more pronounced. Superposition offers a way to achieve this but also introduces challenges, as multiple features are crammed into fewer dimensions, leading to entanglement and interference.
-% Polysemantic Neurons: In deep learning models like GPT-3 or large vision models, neurons are often polysemantic, representing multiple, often unrelated, features. This polysemantic nature, as a byproduct of superposition, underscores the need to better understand and possibly disentangle these representations to ensure robustness and reliability in model outputs.
-% Future Directions: In the quest for more interpretable AI, solving superposition could help researchers move toward models where each neuron represents a single, easily understandable feature. This goal is increasingly important as we look to integrate deep learning models into safety-critical applications like healthcare, autonomous vehicles, and finance.
-% Thus, even in the deep learning era, where performance and scale often take precedence, the study of superposition remains crucial for addressing the ongoing challenges of interpretability, safety, and reliability in AI systems.
+If we are able to obtain universal quantifiers over features as the paper suggests, we may even see a shift in the deep learning era where engineers can build or modify parts of these networks manually, having the ability to dictate the inclusion of specific features, and change the semanticity of neurons at will.
 
 \subsection{Other TODO delete}
 
