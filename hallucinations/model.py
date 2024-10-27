@@ -13,6 +13,7 @@ class Config:
     n_features: int
     n_hidden: int
     word2idx: dict
+    run_mode: str
 
     # We optimize n_instances models in a single training loop
     # to let us sweep over sparsity or importance curves
@@ -29,17 +30,27 @@ class Model(nn.Module):
     ):
         super().__init__()
         self.config = config
+        self.embed_size = config.n_features
+        self.run_mode = config.run_mode
+        # Create a folder to save the embedding matrix
         self.embed_model = "glove-wiki-gigaword-100"
-        self.word2vect = api.load(self.embed_model)
         if not os.path.exists("embeddings"):
             os.makedirs("embeddings")
         self.embed_path = "embeddings/E.npy"
-        self.embed_size = int(self.embed_model.split("-")[-1])
-        self.embed_matrix = np.zeros(shape=[config.vocab_size, self.embed_size])
+        if self.run_mode != "scratch":
+            self.embed_size = int(self.embed_model.split("-")[-1])
         self.word2idx = config.word2idx
+        self.word2vect = (
+            api.load(self.embed_model)
+            if self.run_mode in ["init-only", "init-fine_tune"]
+            else None
+        )
+        self.embed_matrix = torch.zeros(config.vocab_size, self.embed_size)
         self.build_embedding_matrix()
 
-        self.embedding = nn.Embedding.from_pretrained(self.embed_matrix, freeze=True)
+        self.embedding = nn.Embedding.from_pretrained(
+            self.embed_matrix, freeze=(self.run_mode == "init-only")
+        )
         self.conv1d = nn.Conv1d(
             in_channels=self.embed_size,
             out_channels=config.n_features,
@@ -59,6 +70,8 @@ class Model(nn.Module):
         # self.importance = importance.to(device)
 
     def build_embedding_matrix(self):
+        if self.run_mode == "scratch":
+            return
         # Insert your code here. Your code should allow for saving the embedding matrix in ``self.embed_path'' (as numpy array) for future retrieval.
         if os.path.exists(self.embed_path):
             self.embed_matrix = np.load(self.embed_path)
@@ -79,6 +92,7 @@ class Model(nn.Module):
         # features: [..., instance, n_features]
         # W: [instance, n_features, n_hidden]
         x = self.embedding(x)
+
         x = x.transpose(1, 2)
         x = self.conv1d(x)
         x = F.relu(x)

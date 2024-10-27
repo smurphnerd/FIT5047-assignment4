@@ -17,14 +17,14 @@ class BaseTrainer:
         for epoch in range(num_epochs):
             print(f"Epoch {epoch + 1}/{num_epochs}")
             train_loss, train_accuracy = self.train_one_epoch()
-            # val_loss, val_accuracy = self.validate_one_epoch()
-            print(
-                f"{self.num_batches}/{self.num_batches} - train_loss: {train_loss:.4f} - train_accuracy: {train_accuracy*100:.4f}%"
-            )
+            val_loss, val_accuracy = self.validate_one_epoch()
             # print(
-            #     f"{self.num_batches}/{self.num_batches} - train_loss: {train_loss:.4f} - train_accuracy: {train_accuracy*100:.4f}% \
-            #     - val_loss: {val_loss:.4f} - val_accuracy: {val_accuracy*100:.4f}%"
+            #     f"{self.num_batches}/{self.num_batches} - train_loss: {train_loss:.4f} - train_accuracy: {train_accuracy*100:.4f}%"
             # )
+            print(
+                f"{self.num_batches}/{self.num_batches} - train_loss: {train_loss:.4f} - train_accuracy: {train_accuracy*100:.4f}% \
+                - val_loss: {val_loss:.4f} - val_accuracy: {val_accuracy*100:.4f}%"
+            )
 
     # train in one epoch, return the train_acc, train_loss
     def train_one_epoch(self):
@@ -65,6 +65,51 @@ class BaseTrainer:
         accuracy = correct / total
         loss = loss / len(self.val_loader)
         return loss, accuracy
+
+    def evaluate_dual_labels(self, loader):
+        self.model.eval()
+        total_loss = 0.0
+        correct = 0
+        total = 0
+
+        with torch.no_grad():
+            for data in loader:
+                (
+                    inputs,
+                    dual_labels,
+                ) = data  # dual_labels contains lists of multiple possible labels per input
+                inputs = inputs.to(self.device)
+                dual_labels = [label_set.to(self.device) for label_set in dual_labels]
+
+                outputs = self.model(inputs)
+                loss = 0.0
+
+                # Compute loss for each sample based on the multiple labels
+                for i, label_set in enumerate(dual_labels):
+                    # Compute the loss against each of the possible labels
+                    per_sample_loss = torch.mean(
+                        torch.stack(
+                            [self.criterion(outputs[i], label) for label in label_set]
+                        )
+                    )
+                    loss += per_sample_loss.item()
+
+                total_loss += loss
+
+                # Get predictions
+                _, predicted = torch.max(outputs.data, 1)
+
+                # For each sample, check if the predicted label is in the set of dual labels
+                for i, label_set in enumerate(dual_labels):
+                    if predicted[i].item() in label_set.tolist():
+                        correct += 1
+                    total += 1
+
+        # Compute overall loss and accuracy
+        avg_loss = total_loss / len(loader)
+        accuracy = correct / total
+
+        return avg_loss, accuracy
 
     # return the val_acc, val_loss, be called at the end of each epoch
     def validate_one_epoch(self):
