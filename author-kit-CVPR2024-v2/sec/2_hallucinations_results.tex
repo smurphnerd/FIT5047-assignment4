@@ -6,7 +6,7 @@ To test this, we trained a classifier on high-sparsity data, inducing superposit
 
 \subsection{Dataset}
 We used a dataset with five features, represented by English affixes: \textit{un-}, \textit{re-}, \textit{-able}, \textit{-ful}, \textit{-ness}, although any set of affixes could work.
-Two datasets were generated: one with words containing a single affix (pure words) and another with words containing multiple affixes (dual words, e.g., \textit{unreliable}).
+Two datasets were generated: one with words containing a single affix (pure words) and another with words containing multiple affixes (dual words, e.g., \textit{resourceful}).
 The pure dataset was split into training and test sets, while the dual dataset was reserved for evaluation.
 
 \subsection{Model}
@@ -18,10 +18,10 @@ Using the \href{https://colab.research.google.com/github/anthropics/toy-models-o
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.3\linewidth]{figures/hallucinations_hidden_layer.png}
-	\caption{Representation of the five features in the hidden layer.}
+	\caption{This figure can be reproduced with our \href{https://colab.research.google.com/github/smurphnerd/FIT5047-assignment4/blob/main/modelling_hallucinations.ipynb}{Modelling Hallucinations Colab notebook}.}
 	\label{fig:hidden_layer_representation}
 \end{figure}
-Figure \ref{fig:hidden_layer_representation} shows the model all features, though it didn't form the pentagon-like structure noted in the paper.
+Figure \ref{fig:hidden_layer_representation} shows the model encoded all features, though it didn't form the pentagon-like structure noted in the paper.
 Table \ref{tab:hallucinations_results} shows the results for the test set and the dual dataset.
 \begin{table}[h]
 	\centering
@@ -29,12 +29,12 @@ Table \ref{tab:hallucinations_results} shows the results for the test set and th
 		\toprule
 		\textbf{Dataset} & \textbf{Accuracy} \\
 		\midrule
-		Test set         & 0.9772            \\
-		Dual dataset     & 0.9581            \\
+		Test set         & 0.9708            \\
+		Dual dataset     & 0.8651            \\
 		\bottomrule
 	\end{tabular}
 	\caption{Model evaluation on the test set and the dual dataset.}
 	\label{tab:hallucinations_results}
 \end{table}
-The model performed well on the test set, but accuracy dropped on the dual dataset, even though each dual word had twice the correct labels.
+The model performed well on the test set, but accuracy dropped significantly on the dual dataset, even though each dual word had twice the correct labels.
 This suggests that when features are less sparse than in training, the additive interference from superposition may cause misinterpretations, contributing to hallucinations in large language models.
